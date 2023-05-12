@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d4fa596027.js" crossorigin="anonymous"></script>
+    <title>home</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+
+        }
+
+        #screen {
+            border: 2px solid green;
+            width: 100%;
+            height: 150vh;
+        }
+
+        #nav-div {
+            height: 10vh;
+            width: 100%;
+            background-color: #2874f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+        }
+
+        #inner-nav {
+            width: 85%;
+            height: 10vh;
+            /* border: 1px solid white; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #Frst-Nav>p {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        #Frst-Nav>p>img {
+            height: 17px;
+            width: 17px;
+        }
+
+        #second-Nav {
+            height: 45px;
+            width: 500px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 3px;
+
+        }
+
+        #second-Nav>input {
+            height: 35px;
+            width: 80%;
+            font-size: 18px;
+            border: none;
+            outline: none;
+
+        }
+
+        #second-Nav>i {
+            color: #2874f0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #third-Nav {
+            height: 40px;
+            width: 150px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #third-Nav>button {
+            height: 35px;
+            width: 150px;
+            background-color: white;
+            font-size: 20px;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            color: #2874f0;
+            cursor: pointer;
+        }
+
+        #fourth-Nav {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #fifth-nav {
+            width: 55px;
+            display: flex;
+            font-size: 18px;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #body-div {
+            position: relative;
+            top: 10%;
+            width: 100%;
+            border: 2px solid red;
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+
+        }
+
+        #body-div>div {
+            height: 300px;
+            width: 18%;
+            border: 1px double green;
+        }
+        #body-div>div>img{
+            width: 100%;
+            height: 70%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="screen">
+        <div id="nav-div">
+            <div id="inner-nav">
+                <div id="Frst-Nav">
+                    <h1><em>Flipkart</em></h1>
+                    <p>explore <span style="color: #f8e108;">Pluse</span> <img
+                            src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/plus_aef861.png"
+                            alt=""></p>
+                </div>
+                <div id="second-Nav">
+                    <input type="text" placeholder="Search for products Brands and more">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div id="third-Nav">
+                    <button onclick="Logout (event)">Login</button>
+                </div>
+                <div id="fourth-Nav">
+                    <p><b>become a seller</b></p>
+                </div>
+                <div id="fifth-nav">
+                    <p>more</p>
+                    <i class="fa-solid fa-angle-down"></i>
+                </div>
+                <div id="fifth-nav">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <p>cart</p>
+                </div>
+            </div>
+        </div>
+        <div id="body-div">
+            
+
+        </div>
+    </div>
+    <script>
+        function Logout(event) {
+
+            var L_CurrentUser = JSON.parse(localStorage.getItem("flipkart_UserData"))
+            localStorage.removeItem(L_CurrentUser);
+            alert("logout sucessfull")
+            window.location.href = "./login.html";
+
+        }
+        window.onload = function () {
+            var localProduct = JSON.parse(localStorage.getItem("Flipkart_product"));
+            var divFromHtml = document.getElementById("body-div");
+
+            var displayProduct = [];
+
+            for (var i = 0; i < localProduct.length; i++) {
+
+                displayProduct += `
+    <div> ${localProduct[i].ProName}
+    <img src="${localProduct[i].ProImage}" alt="product image">
+    <p>${localProduct[i].ProDiscription}</p>
+    <h3>${localProduct[i].ProPrice}</h3>
+    <button onclick="AddToCart" > add to cart</button>
+    </div>
+    `
+            }
+            divFromHtml.innerHTML = displayProduct;
+        }
+
+    </script>
+</body>
+
+</html>
