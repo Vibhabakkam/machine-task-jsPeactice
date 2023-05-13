@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <div id="first">
+        <button>login</button>
+    </div>
+    <div id="second">
+
+    </div>
+    <div id="third">
+
+    </div>
+  
+
+</body>
+<script src="./script.js"></script>
+<script>
+    window.onload = function () {
+        var L_currentUser = JSON.parse(localStorage.getItem("T_currentUser"))
+        var divFromHtml1 = document.getElementById("first");
+        var divFromHtml2 = document.getElementById("second");
+
+        if (L_currentUser) {
+            divFromHtml1.innerHTML = `<h3>${L_currentUser.userName}</h3>`
+            divFromHtml2.innerHTML = `<button onclick="logout(event)">logout</button>`
+        }
+
+
+
+        var T_localData = JSON.parse(localStorage.getItem("ProductData"));
+        var divFromHtml = document.getElementById("third");
+        var displayDiv = [];
+
+        for (var i = 0; i < T_localData.length; i++) {
+
+            displayDiv += `
+            <h3> ${T_localData[i].productName}</h3>
+           <img src="${T_localData[i].productImage}" alt="image">
+           <p>${T_localData[i].productDiscription}</p>
+           <h3>${T_localData[i].productPrice}</h3>
+           <button>add to cart</button>
+            `
+        }
+
+         divFromHtml.innerHTML = displayDiv;
+    }
+
+    function displayProduct(event) {
+        event.preventDefault();
+        var T_localData = JSON.parse(localStorage.getItem("ProductData"));
+        var divFromHtml = document.getElementById("third");
+        var displayDiv = [];
+
+        for (var i = 0; i < T_localData.length; i++) {
+
+            displayDiv += `
+            <h3> ${T_localData[i].productName}</h3>
+           <img src="${T_localData[i].productImage}" alt="">
+           <p>${T_localData[i].productDiscription}</p>
+           <h3>${T_localData[i].productPrice}</h3>
+           <button>add to cart</button>
+            `
+        }
+
+         divFromHtml.innerHTML = displayDiv;
+
+    }
+</script>
+
+</html>

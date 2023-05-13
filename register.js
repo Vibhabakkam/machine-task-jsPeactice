@@ -13,12 +13,12 @@ function register(event) {
     userPassword: f_UserPassword,
     userName: f_UserConformPassword,
   };
-  var flipkart_Storage =  JSON.parse(localStorage.getItem("flipkart_UserData")) || [];
+  var flipkart_Storage = JSON.parse(localStorage.getItem("flipkart_UserData")) || [];
   var flag = false;
 
   for (var i = 0; i < flipkart_Storage.length; i++) {
     if (flipkart_Storage[i].userEmail === f_UserEmail) {
-      flag = true;
+      flag = true; 
     }
   }
   if (flag) {
